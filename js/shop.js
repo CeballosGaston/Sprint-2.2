@@ -71,11 +71,16 @@ const products = [
 
 // SELECTORS
 
-const buttons = document.querySelectorAll(".add-to-cart");
-buttons.forEach((button) => {
+const buyButtons = document.querySelectorAll(".add-to-cart");
+buyButtons.forEach((button) => {
   button.addEventListener("click", () => {
     buy(button.dataset.productId);
   });
+});
+
+const cleanCartButton = document.getElementById("clean-cart");
+cleanCartButton.addEventListener("click", () => {
+  cleanCart();
 });
 
 // Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
@@ -112,7 +117,9 @@ const buy = (id) => {
 console.log(cart);
 
 // Exercise 2
-const cleanCart = () => {};
+const cleanCart = () => {
+  cart.length = 0;
+};
 
 // Exercise 3
 const calculateTotal = () => {
