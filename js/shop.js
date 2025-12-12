@@ -83,6 +83,9 @@ cleanCartButton.addEventListener("click", () => {
   cleanCart();
 });
 
+let totalPrice = document.getElementById("total_price");
+totalPrice.innerHTML = 0;
+
 // Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
 
 let count = 0;
@@ -122,6 +125,9 @@ const buy = (id) => {
   localStorage.setItem("productsInCart", JSON.stringify(cart));
   localStorage.setItem("count", JSON.stringify(count));
 
+  // 3. Total
+
+  totalPrice.innerHTML = calculateTotal();
   printCart();
 };
 
@@ -130,6 +136,7 @@ const cleanCart = () => {
   localStorage.removeItem("productsInCart");
   localStorage.removeItem("count");
   printCart();
+  totalPrice.innerHTML = 0;
 };
 
 // Exercise 3
@@ -142,7 +149,8 @@ const calculateTotal = () => {
     const totalProductoActual = precio * cantidad;
     total += totalProductoActual;
   }
-  return total;
+  return total.toFixed(2);
+
   // Calculate total price of the cart using the "cartList" array
 };
 
@@ -182,7 +190,8 @@ const printCart = () => {
     row.appendChild(quantity);
 
     const subtotal = document.createElement("td");
-    subtotal.textContent = `${product.price * product.quantity}`;
+    let monto = product.price * product.quantity;
+    subtotal.textContent = monto.toFixed(2);
     row.appendChild(subtotal);
 
     cartList.appendChild(row);
