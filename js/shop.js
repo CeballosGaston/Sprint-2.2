@@ -112,6 +112,8 @@ const buy = (id) => {
   } else {
     productInCart.quantity += 1;
   }
+
+  localStorage.setItem("productsInCart", JSON.stringify(cart));
 };
 
 console.log(cart);
@@ -123,8 +125,19 @@ const cleanCart = () => {
 
 // Exercise 3
 const calculateTotal = () => {
+  let total = 0;
+
+  for (let i = 0; i < cart.length; i++) {
+    const precio = cart[i].price;
+    const cantidad = cart[i].quantity;
+    const totalProductoActual = precio * cantidad;
+    total += totalProductoActual;
+  }
+  return total;
   // Calculate total price of the cart using the "cartList" array
 };
+
+console.log(calculateTotal());
 
 // Exercise 4
 const applyPromotionsCart = () => {
@@ -134,7 +147,34 @@ const applyPromotionsCart = () => {
 // Exercise 5
 const printCart = () => {
   // Fill the shopping cart modal manipulating the shopping cart dom
+  const cart = JSON.parse(localStorage.getItem("productsInCart")) || [];
+  const cartList = document.getElementById("cart_list");
+  cartList.innerHTML = "";
+
+  cart.forEach((product) => {
+    const row = document.createElement("tr");
+
+    const name = document.createElement("th");
+    name.textContent = product.name;
+    row.appendChild(name);
+
+    const price = document.createElement("td");
+    price.textContent = product.price;
+    row.appendChild(price);
+
+    const quantity = document.createElement("td");
+    quantity.textContent = product.quantity;
+    row.appendChild(quantity);
+
+    const subtotal = document.createElement("td");
+    subtotal.textContent = `${product.price} * ${product.quantity}`;
+    row.appendChild(subtotal);
+
+    cartList.appendChild(row);
+  });
 };
+
+printCart();
 
 // ** Nivell II **
 
