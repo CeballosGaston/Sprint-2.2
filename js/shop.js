@@ -84,6 +84,8 @@ cleanCartButton.addEventListener("click", () => {
 });
 
 // Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
+
+let count = 0;
 let cart = [];
 
 let total = 0;
@@ -91,6 +93,8 @@ let total = 0;
 // Exercise 1
 const buy = (id) => {
   // 1. Loop for to the array products to get the item to add to cart
+  cart = JSON.parse(localStorage.getItem("productsInCart")) || [];
+  count = JSON.parse(localStorage.getItem("count"));
 
   let foundProduct = null;
 
@@ -113,14 +117,19 @@ const buy = (id) => {
     productInCart.quantity += 1;
   }
 
-  localStorage.setItem("productsInCart", JSON.stringify(cart));
-};
+  count += 1;
 
-console.log(cart);
+  localStorage.setItem("productsInCart", JSON.stringify(cart));
+  localStorage.setItem("count", JSON.stringify(count));
+
+  printCart();
+};
 
 // Exercise 2
 const cleanCart = () => {
-  cart.length = 0;
+  localStorage.removeItem("productsInCart");
+  localStorage.removeItem("count");
+  printCart();
 };
 
 // Exercise 3
@@ -145,9 +154,15 @@ const applyPromotionsCart = () => {
 };
 
 // Exercise 5
+
 const printCart = () => {
   // Fill the shopping cart modal manipulating the shopping cart dom
+
   const cart = JSON.parse(localStorage.getItem("productsInCart")) || [];
+  const count = JSON.parse(localStorage.getItem("count"));
+  let countProduct = document.getElementById("count_product");
+  countProduct.innerHTML = count;
+
   const cartList = document.getElementById("cart_list");
   cartList.innerHTML = "";
 
@@ -167,7 +182,7 @@ const printCart = () => {
     row.appendChild(quantity);
 
     const subtotal = document.createElement("td");
-    subtotal.textContent = `${product.price} * ${product.quantity}`;
+    subtotal.textContent = `${product.price * product.quantity}`;
     row.appendChild(subtotal);
 
     cartList.appendChild(row);
