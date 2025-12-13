@@ -120,12 +120,14 @@ const buy = (id) => {
     productInCart.quantity += 1;
   }
 
+  applyPromotionsCart();
+
   count += 1;
 
   localStorage.setItem("productsInCart", JSON.stringify(cart));
   localStorage.setItem("count", JSON.stringify(count));
 
-  // 3. Total
+  // 3. Total print
 
   totalPrice.innerHTML = calculateTotal();
   printCart();
@@ -144,10 +146,7 @@ const calculateTotal = () => {
   let total = 0;
 
   for (let i = 0; i < cart.length; i++) {
-    const precio = cart[i].price;
-    const cantidad = cart[i].quantity;
-    const totalProductoActual = precio * cantidad;
-    total += totalProductoActual;
+    total += cart[i].subTotal;
   }
   return total.toFixed(2);
 
@@ -159,6 +158,16 @@ console.log(calculateTotal());
 // Exercise 4
 const applyPromotionsCart = () => {
   // Apply promotions to each item in the array "cart"
+
+  for (let i = 0; i < cart.length; i++) {
+    if (cart[i].id == 1 && cart[i].quantity >= 3) {
+      cart[i].subTotal = cart[i].quantity * cart[i].price * 0.8;
+    } else if (cart[i].id == 3 && cart[i].quantity >= 10) {
+      cart[i].subTotal = cart[i].quantity * cart[i].price * 0.7;
+    } else cart[i].subTotal = cart[i].quantity * cart[i].price;
+  }
+
+  localStorage.setItem("productsInCart", JSON.stringify(cart));
 };
 
 // Exercise 5
@@ -190,8 +199,8 @@ const printCart = () => {
     row.appendChild(quantity);
 
     const subtotal = document.createElement("td");
-    let monto = product.price * product.quantity;
-    subtotal.textContent = monto.toFixed(2);
+
+    subtotal.textContent = product.subTotal.toFixed(2);
     row.appendChild(subtotal);
 
     cartList.appendChild(row);
