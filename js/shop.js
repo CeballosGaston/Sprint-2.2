@@ -2,7 +2,7 @@
 const products = [
   {
     id: 1,
-    name: "cooking oil",
+    name: "Kind of Blue",
     price: 10.5,
     type: "grocery",
     offer: {
@@ -12,13 +12,13 @@ const products = [
   },
   {
     id: 2,
-    name: "Pasta",
+    name: "Chet Stereo",
     price: 6.25,
     type: "grocery",
   },
   {
     id: 3,
-    name: "Instant cupcake mixture",
+    name: "Chet Baker In New York",
     price: 5,
     type: "grocery",
     offer: {
@@ -28,37 +28,37 @@ const products = [
   },
   {
     id: 4,
-    name: "All-in-one",
+    name: "Blue Train",
     price: 260,
     type: "beauty",
   },
   {
     id: 5,
-    name: "Zero Make-up Kit",
+    name: "Saxophone Colossus",
     price: 20.5,
     type: "beauty",
   },
   {
     id: 6,
-    name: "Lip Tints",
+    name: "Giant Steps",
     price: 12.75,
     type: "beauty",
   },
   {
     id: 7,
-    name: "Lawn Dress",
+    name: "Body And Soul",
     price: 15,
     type: "clothes",
   },
   {
     id: 8,
-    name: "Lawn-Chiffon Combo",
+    name: "Ella Fitzgerald",
     price: 19.99,
     type: "clothes",
   },
   {
     id: 9,
-    name: "Toddler Frock",
+    name: "Sara Vaughan",
     price: 9.99,
     type: "clothes",
   },
@@ -194,9 +194,17 @@ const printCart = () => {
     price.textContent = product.price;
     row.appendChild(price);
 
+    // const minusButton = document.createElement("button");
+    // minusButton.textContent = "-";
+    // row.appendChild(minusButton);
+
     const quantity = document.createElement("td");
     quantity.textContent = product.quantity;
     row.appendChild(quantity);
+
+    //  const plusButton = document.createElement("button");
+    //   plusButton.textContent = "+";
+    //   row.appendChild(plusButton);
 
     const subtotal = document.createElement("td");
 

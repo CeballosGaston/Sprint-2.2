@@ -83,11 +83,7 @@ const phoneToNumber = parseInt(fPhone.value);
   
   return error === 0;
 
-  //   if (error > 0) {
-  //     alert("Please fill in all required fields.");
-  //   } else {
-  //     alert("Form submitted successfully");
-  //   }
+
 };
 
 
