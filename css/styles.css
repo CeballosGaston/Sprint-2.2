@@ -3446,6 +3446,7 @@ textarea.form-control-lg {
 .btn-outline-dark {
   color: #212529;
   border-color: #212529;
+  background-color: rgb(101, 101, 219);
 }
 .btn-outline-dark:hover {
   color: #fff;
@@ -4544,6 +4545,7 @@ textarea.form-control-lg {
 .card-body {
   flex: 1 1 auto;
   padding: 1rem 1rem;
+  background-color: #8ca12bd1;
 }
 
 .card-title {
@@ -4575,7 +4577,7 @@ textarea.form-control-lg {
 
 .card-footer {
   padding: 0.5rem 1rem;
-  background-color: rgba(0, 0, 0, 0.03);
+   background-color: #8ca12bd1;
   border-top: 1px solid rgba(0, 0, 0, 0.125);
 }
 .card-footer:last-child {
