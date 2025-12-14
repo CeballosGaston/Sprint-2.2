@@ -194,17 +194,19 @@ const printCart = () => {
     price.textContent = product.price;
     row.appendChild(price);
 
-    // const minusButton = document.createElement("button");
-    // minusButton.textContent = "-";
-    // row.appendChild(minusButton);
+    const minusButton = document.createElement("button");
+    minusButton.addEventListener("click", () => removeFromCart(product.id));
+    minusButton.textContent = "-";
+    row.appendChild(minusButton);
 
     const quantity = document.createElement("td");
     quantity.textContent = product.quantity;
     row.appendChild(quantity);
 
-    //  const plusButton = document.createElement("button");
-    //   plusButton.textContent = "+";
-    //   row.appendChild(plusButton);
+    const plusButton = document.createElement("button");
+    plusButton.addEventListener("click", () => buy(product.id));
+    plusButton.textContent = "+";
+    row.appendChild(plusButton);
 
     const subtotal = document.createElement("td");
 
@@ -220,7 +222,38 @@ printCart();
 // ** Nivell II **
 
 // Exercise 7
-const removeFromCart = (id) => {};
+const removeFromCart = (id) => {
+  let foundProduct = null;
+
+  for (let i = 0; i < products.length; i++) {
+    const productId = Number(id);
+    if (products[i].id === productId) {
+      foundProduct = products[i];
+      break;
+    }
+  }
+
+  const productInCart = cart.find((obj) => obj.id === foundProduct.id);
+
+  if (productInCart.quantity === 1) {
+    const productIndex = cart.findIndex((item) => item.id === id);
+    cart.splice(productIndex, 1);
+  } else {
+    productInCart.quantity -= 1;
+  }
+
+  applyPromotionsCart();
+
+  count -= 1;
+
+  localStorage.setItem("productsInCart", JSON.stringify(cart));
+  localStorage.setItem("count", JSON.stringify(count));
+
+  // 3. Total print
+
+  totalPrice.innerHTML = calculateTotal();
+  printCart();
+};
 
 const open_modal = () => {
   printCart();
