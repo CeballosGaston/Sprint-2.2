@@ -71,6 +71,24 @@ const products = [
 
 // SELECTORS
 
+//Disable Chekout BTN when the cart is empty
+
+const checkbtn = document.getElementById("checkoutbtn");
+ 
+ function checkbtnHide() {
+  const cart = JSON.parse(localStorage.getItem("productsInCart")) || [];
+
+  if (cart.length === 0) {
+    checkbtn.style.display = "none";
+  } else {
+    checkbtn.style.display = "inline";
+  }
+}
+checkbtnHide();
+
+ 
+ 
+
 const buyButtons = document.querySelectorAll(".add-to-cart");
 buyButtons.forEach((button) => {
   button.addEventListener("click", () => {
@@ -131,6 +149,8 @@ const buy = (id) => {
 
   totalPrice.innerHTML = calculateTotal();
   printCart();
+  checkbtnHide();
+  
 };
 
 // Exercise 2
@@ -139,6 +159,7 @@ const cleanCart = () => {
   localStorage.removeItem("count");
   printCart();
   totalPrice.innerHTML = 0;
+  checkbtnHide();
 };
 
 // Exercise 3
@@ -253,8 +274,11 @@ const removeFromCart = (id) => {
 
   totalPrice.innerHTML = calculateTotal();
   printCart();
+  checkbtnHide();
 };
 
 const open_modal = () => {
   printCart();
 };
+
+
