@@ -69,15 +69,22 @@ const products = [
 // ** You'll understand the code better than with console.log(), and you'll also find errors faster.
 // ** Don't hesitate to seek help from your peers or your mentor if you still struggle with debugging.
 
+// Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
+
+// let count = 0;
+// let cart = [];
+let cart = JSON.parse(localStorage.getItem("productsInCart")) || [];
+let count = JSON.parse(localStorage.getItem("count")) || 0;
+
+let total = 0;
+
 // SELECTORS
 
 //Disable Chekout BTN when the cart is empty
 
 const checkbtn = document.getElementById("checkoutbtn");
- 
- function checkbtnHide() {
-  const cart = JSON.parse(localStorage.getItem("productsInCart")) || [];
 
+function checkbtnHide() {
   if (cart.length === 0) {
     checkbtn.style.display = "none";
   } else {
@@ -85,9 +92,6 @@ const checkbtn = document.getElementById("checkoutbtn");
   }
 }
 checkbtnHide();
-
- 
- 
 
 const buyButtons = document.querySelectorAll(".add-to-cart");
 buyButtons.forEach((button) => {
@@ -104,18 +108,10 @@ cleanCartButton.addEventListener("click", () => {
 let totalPrice = document.getElementById("total_price");
 totalPrice.innerHTML = 0;
 
-// Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
-
-let count = 0;
-let cart = [];
-
-let total = 0;
-
 // Exercise 1
 const buy = (id) => {
   // 1. Loop for to the array products to get the item to add to cart
-  cart = JSON.parse(localStorage.getItem("productsInCart")) || [];
-  count = JSON.parse(localStorage.getItem("count"));
+  // cart = JSON.parse(localStorage.getItem("productsInCart")) || [];
 
   let foundProduct = null;
 
@@ -150,11 +146,12 @@ const buy = (id) => {
   totalPrice.innerHTML = calculateTotal();
   printCart();
   checkbtnHide();
-  
 };
 
 // Exercise 2
 const cleanCart = () => {
+  cart = [];
+  count = 0;
   localStorage.removeItem("productsInCart");
   localStorage.removeItem("count");
   printCart();
@@ -196,8 +193,8 @@ const applyPromotionsCart = () => {
 const printCart = () => {
   // Fill the shopping cart modal manipulating the shopping cart dom
 
-  const cart = JSON.parse(localStorage.getItem("productsInCart")) || [];
-  const count = JSON.parse(localStorage.getItem("count"));
+  // const cart = JSON.parse(localStorage.getItem("productsInCart")) || [];
+  // const count = JSON.parse(localStorage.getItem("count"));
   let countProduct = document.getElementById("count_product");
   countProduct.innerHTML = count;
 
@@ -280,5 +277,3 @@ const removeFromCart = (id) => {
 const open_modal = () => {
   printCart();
 };
-
-
