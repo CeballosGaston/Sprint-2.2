@@ -186,7 +186,7 @@ const applyPromotionsCart = () => {
     } else cart[i].subTotal = cart[i].quantity * cart[i].price;
   }
 
-  localStorage.setItem("productsInCart", JSON.stringify(cart));
+ 
 };
 
 // Exercise 5
@@ -239,6 +239,7 @@ const printCart = () => {
     
   });
   totalPrice.innerHTML = calculateTotal();
+  applyPromotionsCart();
 };
 
 printCart();
