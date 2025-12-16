@@ -71,8 +71,7 @@ const products = [
 
 // Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
 
-// let count = 0;
-// let cart = [];
+
 let cart = JSON.parse(localStorage.getItem("productsInCart")) || [];
 let count = JSON.parse(localStorage.getItem("count")) || 0;
 
@@ -112,7 +111,7 @@ totalPrice.innerHTML = 0;
 // Exercise 1
 const buy = (id) => {
   // 1. Loop for to the array products to get the item to add to cart
-  // cart = JSON.parse(localStorage.getItem("productsInCart")) || [];
+  
 
   let foundProduct = null;
 
@@ -195,8 +194,7 @@ const applyPromotionsCart = () => {
 const printCart = () => {
   // Fill the shopping cart modal manipulating the shopping cart dom
 
-  // const cart = JSON.parse(localStorage.getItem("productsInCart")) || [];
-  // const count = JSON.parse(localStorage.getItem("count"));
+ 
   let countProduct = document.getElementById("count_product");
   countProduct.innerHTML = count;
 
@@ -215,15 +213,18 @@ const printCart = () => {
     row.appendChild(price);
 
     const minusButton = document.createElement("button");
+    minusButton.classList.add("minus-btn");
     minusButton.addEventListener("click", () => removeFromCart(product.id));
     minusButton.textContent = "-";
     row.appendChild(minusButton);
-
+    
     const quantity = document.createElement("td");
     quantity.textContent = product.quantity;
     row.appendChild(quantity);
-
+    
+    
     const plusButton = document.createElement("button");
+    plusButton.classList.add("plus-btn");
     plusButton.addEventListener("click", () => buy(product.id));
     plusButton.textContent = "+";
     row.appendChild(plusButton);
