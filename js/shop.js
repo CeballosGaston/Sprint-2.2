@@ -76,6 +76,7 @@ const products = [
 let cart = JSON.parse(localStorage.getItem("productsInCart")) || [];
 let count = JSON.parse(localStorage.getItem("count")) || 0;
 
+
 let total = 0;
 
 // SELECTORS
@@ -161,6 +162,7 @@ const cleanCart = () => {
 
 // Exercise 3
 const calculateTotal = () => {
+
   let total = 0;
 
   for (let i = 0; i < cart.length; i++) {
@@ -171,7 +173,7 @@ const calculateTotal = () => {
   // Calculate total price of the cart using the "cartList" array
 };
 
-console.log(calculateTotal());
+
 
 // Exercise 4
 const applyPromotionsCart = () => {
@@ -232,7 +234,10 @@ const printCart = () => {
     row.appendChild(subtotal);
 
     cartList.appendChild(row);
+
+    
   });
+  totalPrice.innerHTML = calculateTotal();
 };
 
 printCart();
