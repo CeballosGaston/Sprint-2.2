@@ -1,66 +1,122 @@
-# Sprint 2 IT Academy | Shop
+# 🛒 Shopping Cart – Vanilla JavaScript
 
-## Introduction
+A **shopping cart project** built using only **HTML, CSS, and Vanilla JavaScript**. 
+The main goal is to practice **state management**, **DOM manipulation**, **data persistence with LocalStorage**, and a **clean functional architecture** without frameworks.
 
-A company in the e-commerce sector has asked us for a web application that allows them to offer the purchase of their products through the internet.
-
-You will be in charge of setting up an initial demo version of the application for the client: management of the shopping cart and the application of the promotions on the final price. You have 1 week to finish this part of sprint (2.2).
-
-<br>
-
-## Requirements
+---
 
 
-1. Clone this repo
-```bash
-$ git clone https://github.com/IT-Academy-BCN/starter-code-frontend-shop
+## 📌 Features
+
+* Add products to the cart
+* Increase / decrease item quantities
+* Remove products individually
+* Clear the entire cart
+* Automatic total calculation
+* Product-based promotions and discounts
+* Data persistence using `localStorage`
+* Cart state preserved after page refresh
+
+---
+
+## 🧠 Key Concepts Practiced
+
+* Global state management in JavaScript
+* Separation of concerns (state / logic / render)
+* Pure functions vs side-effect functions
+* Derived state reconstruction
+* Dynamic DOM manipulation
+
+---
+
+## 🛠️ Technologies Used
+
+* HTML5
+* CSS3
+* JavaScript (ES6+)
+* LocalStorage API
+
+---
+
+## 📂 Project Structure
+
+```
+Sprint 2.2
+│
+├── index.html
+├── checkout.html
+├── css/
+│   └── styles.css
+├── js/
+│   ├── checkout.js
+│   └── shop.js
+├── images
+├── jazz albums
+└── README.md
 ```
 
-2. Unlink your repo from the itacademy repository.
-(Explanation: You have to upload the code to your GitHub repository, not to the IT Academy. That's why you have to unlink your project from IT Academy GitHub with the following command)
+---
 
-```bash
-$ git remote rm origin
+## 🧩 Cart Logic
+
+### Main State
+
+* `cart`: array containing the products in memory
+* `count`: total number of items
+
+Both are synchronized with `localStorage`.
+
+---
+
+### Initialization Flow
+
+1. Read persisted data from `localStorage`
+2. Rebuild derived state (subtotals and promotions)
+3. Render cart items
+4. Update total amount and UI controls
+
+---
+
+## 💸 Promotions Implemented
+
+| Product ID | Condition  | Discount |
+| ---------- | ---------- | -------- |
+| ID 1       | ≥ 3 units  | 20% OFF  |
+| ID 3       | ≥ 10 units | 30% OFF  |
+
+*(Easily editable and scalable)*
+
+---
+
+## 📐 Cart Rendering
+
+* Dynamic table generation (`<tbody>` built with JS)
+* `+` and `-` buttons per product
+* Real-time total calculation
+* Checkout button automatically enabled/disabled
+
+---
+
+## 🔒 Persistence
+
+The cart data is stored in `localStorage`:
+
+```js
+localStorage.setItem("productsInCart", JSON.stringify(cart));
+localStorage.setItem("count", JSON.stringify(count));
 ```
 
-3. Link your repo to the repository you have to create in your github account
-(Explanation: Now your project is not linked to any remote repository. In order to upload your code, you have to link your project to the new repository created on github.com using the following command)
+Derived values (subtotals and totals) are **not persisted** — they are recalculated on load.
 
-```bash
-$ git remote add origin <your repo name!>
-```
+---
 
-<br>
+* Clear separation between logic, rendering, and persistence
 
-## Submission
-
-1. It is necessary to upload each exercise in a separate commit. The commit name must clearly indicate its content.
-
-2. Upload the link to your GitHub repository to the virtual campus, enabling your mentor to review and provide feedback.
+---
 
 
+## ✨ Author
 
-<br>
+**Gastón Ceballos**
+Project developed as advanced JavaScript practice.
 
-## Introduction
-
-The statement of the exercise is available on the virtual campus.
-
-<br>
-
-
-## Instructions
-
-You have the following indications from the frontend manager:
-
-- You have prepared the base of the project on which you will work: https://github.com/IT-Academy-BCN/starter-code-frontend-shop
-
-- The base of the project on which you will work has already created all the files, and an initial version of the interface, so you can focus on programming the logic.
-
-- As at the moment we don't consume data from a server using an API, we will work with hardcoded data in the application. For the moment we will implement the logic using a small group of 9 products divided in 3 sections.
-
-- Except for the last level, showing the result of the functions by console is enough.
-
-- The logic to implement will be placed in the src/grocery.js and src/checkout.js files. You will see that the built in functions have already been created for you to implement them.
-
-- It is forbidden to copy the code, since this way you don't learn anything. Furthermore, as you can see, the second release of sprint 5 is a mini-level test with the mentor, in which you will have to demonstrate live that you have acquired the javascript concepts. Don't worry, if you work on the releases you won't have any problems.
