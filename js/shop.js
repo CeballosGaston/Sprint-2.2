@@ -71,10 +71,8 @@ const products = [
 
 // Improved version of cartList. Cart is an array of products (objects), but each one has a quantity field to define its quantity, so these products are not repeated.
 
-
 let cart = JSON.parse(localStorage.getItem("productsInCart")) || [];
 let count = JSON.parse(localStorage.getItem("count")) || 0;
-
 
 let total = 0;
 
@@ -111,7 +109,6 @@ totalPrice.innerHTML = 0;
 // Exercise 1
 const buy = (id) => {
   // 1. Loop for to the array products to get the item to add to cart
-  
 
   let foundProduct = null;
 
@@ -161,7 +158,6 @@ const cleanCart = () => {
 
 // Exercise 3
 const calculateTotal = () => {
-
   let total = 0;
 
   for (let i = 0; i < cart.length; i++) {
@@ -171,8 +167,6 @@ const calculateTotal = () => {
 
   // Calculate total price of the cart using the "cartList" array
 };
-
-
 
 // Exercise 4
 const applyPromotionsCart = () => {
@@ -185,8 +179,6 @@ const applyPromotionsCart = () => {
       cart[i].subTotal = cart[i].quantity * cart[i].price * 0.7;
     } else cart[i].subTotal = cart[i].quantity * cart[i].price;
   }
-
- 
 };
 
 // Exercise 5
@@ -194,7 +186,6 @@ const applyPromotionsCart = () => {
 const printCart = () => {
   // Fill the shopping cart modal manipulating the shopping cart dom
 
- 
   let countProduct = document.getElementById("count_product");
   countProduct.innerHTML = count;
 
@@ -203,40 +194,51 @@ const printCart = () => {
 
   cart.forEach((product) => {
     const row = document.createElement("tr");
+    row.classList.add("row-cell");
 
     const name = document.createElement("th");
+    name.classList.add("name-cell");
     name.textContent = product.name;
     row.appendChild(name);
 
     const price = document.createElement("td");
+    price.classList.add("price-cell");
     price.textContent = product.price;
     row.appendChild(price);
 
+    const qtyCell = document.createElement("td");
+    qtyCell.classList.add("qty-cell");
+
     const minusButton = document.createElement("button");
-    minusButton.classList.add("minus-btn");
-    minusButton.addEventListener("click", () => removeFromCart(product.id));
     minusButton.textContent = "-";
-    row.appendChild(minusButton);
-    
-    const quantity = document.createElement("td");
+    minusButton.classList.add("btn", "btn-sm", "btn-outline-danger");
+    minusButton.addEventListener("click", () => removeFromCart(product.id));
+    // row.appendChild(minusButton);
+
+    const quantity = document.createElement("span");
     quantity.textContent = product.quantity;
-    row.appendChild(quantity);
-    
-    
+    quantity.classList.add("mx-2");
+    // row.appendChild(quantity);
+
     const plusButton = document.createElement("button");
-    plusButton.classList.add("plus-btn");
-    plusButton.addEventListener("click", () => buy(product.id));
     plusButton.textContent = "+";
-    row.appendChild(plusButton);
+    plusButton.classList.add("btn", "btn-sm", "btn-outline-success");
+    plusButton.addEventListener("click", () => buy(product.id));
+    // row.appendChild(plusButton);
+
+    qtyCell.appendChild(minusButton);
+    qtyCell.appendChild(quantity);
+    qtyCell.appendChild(plusButton);
+
+    row.appendChild(qtyCell);
 
     const subtotal = document.createElement("td");
+    subtotal.classList.add("subtotal-cell");
 
     subtotal.textContent = product.subTotal.toFixed(2);
     row.appendChild(subtotal);
 
     cartList.appendChild(row);
-
-    
   });
   totalPrice.innerHTML = calculateTotal();
   applyPromotionsCart();
